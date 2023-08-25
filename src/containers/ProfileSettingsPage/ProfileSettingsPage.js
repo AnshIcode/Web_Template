@@ -42,8 +42,9 @@ export const ProfileSettingsPageComponent = props => {
   } = props;
 
   const handleSubmit = values => {
-    const { firstName, lastName, bio: rawBio } = values;
-
+    console.log('submitttttttt')
+    const { firstName, lastName, bio: rawBio ,rest} = values;
+console.log('rest', rest)
     // Ensure that the optional bio is a string
     const bio = rawBio || '';
 
@@ -51,6 +52,8 @@ export const ProfileSettingsPageComponent = props => {
       firstName: firstName.trim(),
       lastName: lastName.trim(),
       bio,
+      // rest
+      
     };
     const uploadedImage = props.image;
 
@@ -63,8 +66,12 @@ export const ProfileSettingsPageComponent = props => {
     onUpdateProfile(updatedValues);
   };
 
+
+  // adding phoneNumber ============================================
   const user = ensureCurrentUser(currentUser);
-  const { firstName, lastName, bio } = user.attributes.profile;
+  const { firstName, lastName, bio ,...rest} = user.attributes.profile;
+  console.log("rteffds",rest.protectedData.phoneNumber)
+
   const profileImageId = user.profileImage ? user.profileImage.id : null;
   const profileImage = image || { imageId: profileImageId };
 
@@ -72,7 +79,7 @@ export const ProfileSettingsPageComponent = props => {
     <ProfileSettingsForm
       className={css.form}
       currentUser={currentUser}
-      initialValues={{ firstName, lastName, bio, profileImage: user.profileImage }}
+      initialValues={{ firstName, lastName, bio, profileImage: user.profileImage ,rest:rest.protectedData.phoneNumber}}
       profileImage={profileImage}
       onImageUpload={e => onImageUploadHandler(e, onImageUpload)}
       uploadInProgress={uploadInProgress}

@@ -73,7 +73,7 @@ class ProfileSettingsFormComponent extends Component {
             marketplaceName,
             values,
           } = fieldRenderProps;
-
+          console.log("sdjdfdfsjjfdsdjfs",values)
           const user = ensureCurrentUser(currentUser);
 
           // First name
@@ -107,6 +107,18 @@ class ProfileSettingsFormComponent extends Component {
           const bioPlaceholder = intl.formatMessage({
             id: 'ProfileSettingsForm.bioPlaceholder',
           });
+
+          //
+          const phoneNumberLabel = intl.formatMessage({
+            id: 'ProfileSettingsForm.lastNameLabel',
+          });
+          const phoneNumberPlaceholder = intl.formatMessage({
+            id: 'ProfileSettingsForm.lastNamePlaceholder',
+          });
+          const phoneNumberRequiredMessage = intl.formatMessage({
+            id: 'ProfileSettingsForm.lastNameRequired',
+          });
+          const phoneNumberRequired = validators.required(phoneNumberRequiredMessage);
 
           const uploadingOverlay =
             uploadInProgress || this.state.uploadDelay ? (
@@ -288,6 +300,18 @@ class ProfileSettingsFormComponent extends Component {
                     validate={lastNameRequired}
                   />
                 </div>
+
+
+                {/* //phone number */}
+                <FieldTextInput
+                    className={css.lastName}
+                    type="number"
+                    id="phoneNumber"
+                    name="rest"
+                    label={phoneNumberLabel}
+                    placeholder={phoneNumberPlaceholder}
+                    validate={phoneNumberRequired}
+                  />
               </div>
               <div className={classNames(css.sectionContainer, css.lastSection)}>
                 <H4 as="h2" className={css.sectionTitle}>

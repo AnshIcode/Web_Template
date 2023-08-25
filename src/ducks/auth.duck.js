@@ -200,6 +200,7 @@ export const signup = params => (dispatch, getState, sdk) => {
   }
   dispatch(signupRequest());
   const { email, password, firstName, lastName, ...rest } = params;
+  console.log(rest)  //calling the phone number
 
   const createUserParams = isEmpty(rest)
     ? { email, password, firstName, lastName }

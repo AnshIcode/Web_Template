@@ -26,7 +26,6 @@ const SignupFormComponent = props => (
         intl,
         termsAndConditions,
       } = fieldRenderProps;
-
       // email
       const emailRequired = validators.required(
         intl.formatMessage({
@@ -132,6 +131,28 @@ const SignupFormComponent = props => (
                 )}
               />
             </div>
+
+            {/* //adding phone number */}
+            <FieldTextInput
+                className={css.lastNameRoot}
+                type="number"
+                id={formId ? `${formId}.phoneNumber` : 'phoneNumber'}
+                name="phoneNumber"
+                autoComplete="family-name"
+                label={intl.formatMessage({
+                  id: 'SignupForm.lastNameLabel',
+                })}
+                placeholder={intl.formatMessage({
+                  id: 'SignupForm.lastNamePlaceholder',
+                })}
+                validate={validators.required(
+                  intl.formatMessage({
+                    id: 'SignupForm.lastNameRequired',
+                  })
+                )}
+              />
+
+
             <FieldTextInput
               className={css.password}
               type="password"

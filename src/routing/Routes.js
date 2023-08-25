@@ -39,6 +39,7 @@ const callLoadData = props => {
       })
       .catch(e => {
         log.error(e, 'load-data-failed', { routeName: name });
+        
       });
   }
 };
@@ -181,7 +182,7 @@ const Routes = (props, context) => {
   const routeConfiguration = useRouteConfiguration();
   const config = useConfiguration();
   const { isAuthenticated, logoutInProgress, logLoadDataCalls } = props;
-
+// console.log(routeConfiguration)
   const toRouteComponent = route => {
     const renderProps = {
       isAuthenticated,
@@ -191,29 +192,29 @@ const Routes = (props, context) => {
       config,
       logLoadDataCalls,
     };
-
     // By default, our routes are exact.
     // https://reacttraining.com/react-router/web/api/Route/exact-bool
     const isExact = route.exact != null ? route.exact : true;
     return (
       <Route
-        key={route.name}
-        path={route.path}
-        exact={isExact}
-        render={matchProps => (
-          <RouteComponentContainer
-            {...renderProps}
-            match={matchProps.match}
-            location={matchProps.location}
-            staticContext={matchProps.staticContext}
-          />
+      key={route.name}
+      path={route.path}
+      exact={isExact}
+      render={matchProps => (
+        <RouteComponentContainer
+        {...renderProps}
+        match={matchProps.match}
+        location={matchProps.location}
+        staticContext={matchProps.staticContext}
+        />
         )}
-      />
-    );
-  };
-
-  return (
-    <Switch>
+        />
+        );
+      };
+      
+      // console.log(toRouteComponent)
+      return (
+        <Switch>
       {routeConfiguration.map(toRouteComponent)}
       <Route component={NotFoundPage} />
     </Switch>
