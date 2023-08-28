@@ -19,6 +19,7 @@ import {
   IconSpinner,
   FieldTextInput,
   H4,
+  FieldCheckbox,
 } from '../../../components';
 
 import css from './ProfileSettingsForm.module.css';
@@ -73,7 +74,7 @@ class ProfileSettingsFormComponent extends Component {
             marketplaceName,
             values,
           } = fieldRenderProps;
-          console.log("sdjdfdfsjjfdsdjfs",values)
+          console.log("proifle setting form ", values)
           const user = ensureCurrentUser(currentUser);
 
           // First name
@@ -108,18 +109,27 @@ class ProfileSettingsFormComponent extends Component {
             id: 'ProfileSettingsForm.bioPlaceholder',
           });
 
-          //
+          //phonenumber    
           const phoneNumberLabel = intl.formatMessage({
-            id: 'ProfileSettingsForm.lastNameLabel',
+            id: 'ProfileSettingsForm.PhoneNumberLabel',
           });
           const phoneNumberPlaceholder = intl.formatMessage({
-            id: 'ProfileSettingsForm.lastNamePlaceholder',
+            id: 'ProfileSettingsForm.PhoneNumberPlaceholder',
           });
           const phoneNumberRequiredMessage = intl.formatMessage({
-            id: 'ProfileSettingsForm.lastNameRequired',
+            id: 'ProfileSettingsForm.PhoneNumberRequired',
           });
           const phoneNumberRequired = validators.required(phoneNumberRequiredMessage);
 
+
+          //checkbox
+          const checkboxlabel = intl.formatMessage({
+            id: 'ProfileSettingsForm.checkboxlabel',
+          });
+          const checkboxlabel2 = intl.formatMessage({
+            id: 'ProfileSettingsForm.checkboxlabel2',
+          });
+         
           const uploadingOverlay =
             uploadInProgress || this.state.uploadDelay ? (
               <div className={css.uploadingImageOverlay}>
@@ -304,14 +314,35 @@ class ProfileSettingsFormComponent extends Component {
 
                 {/* //phone number */}
                 <FieldTextInput
-                    className={css.lastName}
-                    type="number"
-                    id="phoneNumber"
-                    name="rest"
-                    label={phoneNumberLabel}
-                    placeholder={phoneNumberPlaceholder}
-                    validate={phoneNumberRequired}
+                  className={css.lastName}
+                  type="number"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  label={phoneNumberLabel}
+                  placeholder={phoneNumberPlaceholder}
+                  validate={phoneNumberRequired}
+                />
+
+                <div className={css.name}>
+                  <FieldCheckbox
+                    className={css.lastNameRoot}
+                    id="checkbox" 
+                    name="checkbox"
+                    value='Buyer'
+                    label={checkboxlabel}
+                  
                   />
+
+                  <FieldCheckbox
+                    className={css.lastNameRoot}
+                    // id={formId ? `${formId}.checkbox-id2` : 'checkbox-id2'}
+                    id="checkbox1" 
+                    name="checkbox"
+                    value='Seller'
+                    label={checkboxlabel2}
+              
+                  />
+                </div>
               </div>
               <div className={classNames(css.sectionContainer, css.lastSection)}>
                 <H4 as="h2" className={css.sectionTitle}>

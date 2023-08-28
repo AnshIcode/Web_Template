@@ -7,7 +7,7 @@ import classNames from 'classnames';
 
 import { FormattedMessage, injectIntl, intlShape } from '../../../util/reactIntl';
 import * as validators from '../../../util/validators';
-import { Form, PrimaryButton, FieldTextInput } from '../../../components';
+import { Form, PrimaryButton, FieldTextInput, FieldCheckbox } from '../../../components';
 
 import css from './SignupForm.module.css';
 
@@ -134,23 +134,45 @@ const SignupFormComponent = props => (
 
             {/* //adding phone number */}
             <FieldTextInput
-                className={css.lastNameRoot}
-                type="number"
-                id={formId ? `${formId}.phoneNumber` : 'phoneNumber'}
-                name="phoneNumber"
-                autoComplete="family-name"
-                label={intl.formatMessage({
-                  id: 'SignupForm.lastNameLabel',
-                })}
-                placeholder={intl.formatMessage({
-                  id: 'SignupForm.lastNamePlaceholder',
-                })}
-                validate={validators.required(
-                  intl.formatMessage({
-                    id: 'SignupForm.lastNameRequired',
-                  })
-                )}
-              />
+              className={css.lastNameRoot}
+              type="number"
+              id={formId ? `${formId}.phoneNumber` : 'phoneNumber'}
+              name="phoneNumber"
+              autoComplete="family-name"
+              label={intl.formatMessage({
+                id: 'SignupForm.phoneNumber',
+              })}
+              placeholder={intl.formatMessage({
+                id: 'SignupForm.phonenNunberPlaceholder',
+              })}
+              validate={validators.required(
+                intl.formatMessage({
+                  id: 'SignupForm.phoneNumberRequired',
+                })
+              )}
+            />
+            <div className={css.name}>
+            <FieldCheckbox
+              className={css.lastNameRoot}
+              id={formId ? `${formId}.checkbox-id1` : 'checkbox-id1'}
+              name="checkbox"
+              label={intl.formatMessage({
+                id: 'SignupForm.Buyer',
+              })}
+             value='Buyer'
+             
+            />
+
+            <FieldCheckbox
+              className={css.lastNameRoot}
+              id={formId ? `${formId}.checkbox-id2` : 'checkbox-id2'}
+              name="checkbox"
+              label={intl.formatMessage({
+                id: 'SignupForm.Seller',
+              })}
+            value='Seller'
+            />
+</div>
 
 
             <FieldTextInput
@@ -168,6 +190,7 @@ const SignupFormComponent = props => (
               validate={passwordValidators}
             />
           </div>
+
 
           <div className={css.bottomWrapper}>
             {termsAndConditions}

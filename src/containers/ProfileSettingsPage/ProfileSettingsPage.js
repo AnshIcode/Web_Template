@@ -43,8 +43,10 @@ export const ProfileSettingsPageComponent = props => {
 
   const handleSubmit = values => {
     console.log('submitttttttt')
-    const { firstName, lastName, bio: rawBio ,rest} = values;
-console.log('rest', rest)
+    const { firstName, lastName, bio: rawBio ,phoneNumber,checkbox} = values;
+console.log('on submit profilesetting ', phoneNumber)
+console.log('on submit profilesetting checkbox ', checkbox)
+
     // Ensure that the optional bio is a string
     const bio = rawBio || '';
 
@@ -52,7 +54,10 @@ console.log('rest', rest)
       firstName: firstName.trim(),
       lastName: lastName.trim(),
       bio,
-      // rest
+      publicData:{
+         checkbox,
+         phoneNumber
+      }
       
     };
     const uploadedImage = props.image;
@@ -70,7 +75,12 @@ console.log('rest', rest)
   // adding phoneNumber ============================================
   const user = ensureCurrentUser(currentUser);
   const { firstName, lastName, bio ,...rest} = user.attributes.profile;
-  console.log("rteffds",rest.protectedData.phoneNumber)
+
+  console.log("main phoneN umber on profileSetting",rest.publicData.phoneNumber)
+  console.log("main checkbox  send on profilesetting ",rest.publicData.checkbox)
+
+  
+
 
   const profileImageId = user.profileImage ? user.profileImage.id : null;
   const profileImage = image || { imageId: profileImageId };
@@ -79,7 +89,7 @@ console.log('rest', rest)
     <ProfileSettingsForm
       className={css.form}
       currentUser={currentUser}
-      initialValues={{ firstName, lastName, bio, profileImage: user.profileImage ,rest:rest.protectedData.phoneNumber}}
+      initialValues={{ firstName, lastName, bio, profileImage: user.profileImage ,phoneNumber:rest.publicData.phoneNumber,checkbox:rest.publicData.checkbox}}
       profileImage={profileImage}
       onImageUpload={e => onImageUploadHandler(e, onImageUpload)}
       uploadInProgress={uploadInProgress}
